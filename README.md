@@ -1,6 +1,6 @@
 # RegPwn
 
-Exploit for post
+Exploit for blog post - https://www.mdsec.co.uk/2026/03/rip-regpwn/
 
 Exploit code for LPE in Windows clients and servers
 Tested versions:
