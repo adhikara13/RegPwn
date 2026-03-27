@@ -1,4 +1,4 @@
-name: Build
+name: Build RegPwn
 
 on:
 push:
@@ -6,28 +6,27 @@ workflow_dispatch:
 
 jobs:
 build:
-runs-on: windows-latest
+runs-on: windows-2022
 
 steps:
   - name: Checkout
     uses: actions/checkout@v4
 
-  - name: Setup .NET
-    uses: actions/setup-dotnet@v4
-    with:
-      dotnet-version: '6.0.x'
+  - name: Setup NuGet
+    uses: NuGet/setup-nuget@v2
 
-  - name: Restore
-    run: dotnet restore
+  - name: Restore NuGet packages
+    run: nuget restore RegPwn.sln
 
-  - name: Build
-    run: dotnet build --configuration Release --no-restore
+  - name: Setup MSBuild
+    uses: microsoft/setup-msbuild@v2
 
-  - name: Publish
-    run: dotnet publish --configuration Release --output publish
+  - name: Build solution
+    run: msbuild RegPwn.sln /p:Configuration=Release
 
   - name: Upload artifact
     uses: actions/upload-artifact@v4
     with:
       name: RegPwn
-      path: publish/
+      path: |
+        RegPwn/bin/Release/*.exe
