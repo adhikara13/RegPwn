@@ -28,5 +28,4 @@ steps:
     uses: actions/upload-artifact@v4
     with:
       name: RegPwn
-      path: |
-        RegPwn/bin/Release/*.exe
+      path: RegPwn/bin/Release/*.exe
